@@ -1,0 +1,20 @@
+GitHub branching practice.
+--------------------------
+For each new changelist
+git checkout -b <branch>
+git fetch
+git add ...
+git commit ..
+git push origin <branch>
+
+Testing 
+-------
+
+This runs gae.
+
+Locally:
+$ python run.py -c -s
+
+Deploying to your app engine account.
+1.change app.yaml in main/ to your app id.
+2.$ appcfg.py update main
