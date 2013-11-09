@@ -1,13 +1,17 @@
+"""
+Handlers for the web application.
+This is a thin layer over webapp.servlets, it should just call the run() module
+in each servlet.
+"""
+
 import flask
 from flask import render_template
+from webapp.servlets import index
 
-webapp = flask.Flask(__name__)
+app = flask.Flask(__name__)
 
-################################################################################
-# Main page
-################################################################################
-@webapp.route('/')
-@webapp.route('/index')
-def index():
+@app.route('/')
+@app.route('/index')
+def index_handler():
+  index.run()  
   return render_template('index.html')
-
