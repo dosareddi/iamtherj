@@ -27,11 +27,11 @@ handlers:
   expiration: 1000d
 
 - url: /.*
-  script: main.app
+  script: web.webapp
 
 skip_files:
-- ^(.*/)?app\.yaml
-- ^(.*/)?app\.yml
+- ^(.*/)?web\.yaml
+- ^(.*/)?web\.yml
 - ^(.*/)?index\.yaml
 - ^(.*/)?index\.yml
 - ^(.*/)?#.*#
