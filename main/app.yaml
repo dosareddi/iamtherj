@@ -27,7 +27,7 @@ handlers:
   expiration: 1000d
 
 - url: /.*
-  script: main.app
+  script: web.app
 
 skip_files:
 - ^(.*/)?app\.yaml

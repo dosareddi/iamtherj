@@ -1,0 +1,23 @@
+This is the base directory for eventline.
+
+Where do things go?
+
+app.yaml - app engine setup for web app, for mobile need to define 
+mobile_app.yaml.
+web.py - handler for web app. TODO(dosareddi): this could live within webapp/.
+
+api/ - client facing APIs.
+
+logic/ - eventline specific logic. TODO(dosareddi): this could live within api/.
+
+util/ - grab bag for utils.
+
+db/ - models.
+
+lib/ - all external dependencies.
+
+webapp/ - all web application specific logic and servlet implementation.
+
+templates/ - templates for web application. TODO(dosareddi): this could live within webapp/.
+
+
