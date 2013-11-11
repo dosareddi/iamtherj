@@ -8,30 +8,26 @@ class Event(ndb.Model):
   """Basic information about an event."""
   name = ndb.StringProperty(indexed=True, required=True)
 
-  # TBD: Use the timestamp for this.. or some auto increment 
-  event_id = ndb.IntegerProperty(indexed=True, required=True)
-
   description = ndb.StringProperty()
   start_time = ndb.DateTimeProperty(required=True)
   end_time = ndb.DateTimeProperty(required=True)
   
   # TODO(dasarathi): Consider using the calendar DAV format for storing.
 
-class Timeline(ndb.Model):
-  """Timeline is a series of events or sub-timelines."""
+# TBD: Call this timeline instead?
+# Or: Have eventline object that is composed of multiple timelines?
+class Eventline(ndb.Model):
+  """A timeline of events or sub-timelines."""
   name = ndb.StringProperty(indexed=True, required=True)
-
-  # TBD: Use the timestamp for this.. or some auto increment 
-  timeline_id = ndb.IntegerProperty(indexed=True, required=True)
-
   description = ndb.StringProperty()
-  start_time = ndb.DateTimeProperty(required=True)
-  end_time = ndb.DateTimeProperty(required=True)
 
-  events = ndb.StructuredProperty(Event, repeated=True)
-  
+  user_id = ndb.StringProperty(indexed=True, required=True)
+
+  # TODO(dasarathi): Add tags.
+
+  events = ndb.StructuredProperty(Event, repeated=True)  
   # TBD: use keys or timeline ids?
-  child_timelines = ndb.KeyProperty(kind='Timeline')
+  child_eventlines = ndb.KeyProperty(kind='Eventline', repeated=True)
   
 
 
