@@ -1,4 +1,6 @@
+from db.eventline_db import Timeline
 from db.user_db import User
+
 
 # TBD: Should these be attributes of the user object
 def create_user(name, user_id, email):
@@ -30,6 +32,18 @@ def get_user(user_id):
   # Check https://developers.google.com/appengine/docs/python/ndb/queries#filter_by_prop
   return User.query(User.user_id == user_id).get()
   
+
+def get_user_timelines(user_id):
+  """Get all timelines belonging to this user from the datastore.
+  
+  Arguments:
+  user_id -- string.
+
+  Returns:
+    List of Timeline objects.
+  """
+  return Timeline.query(Timeline.user_id == user_id).fetch()
+
   
   
   

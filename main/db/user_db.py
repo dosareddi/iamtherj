@@ -14,7 +14,7 @@ class User(ndb.Model):
   # TODO(dasarathi): Look into this when adding auth support.
   # auth_ids = ndb.StringProperty(indexed=True, repeated=True)
   
-  # TBD: Eventlines followed by a user. Consider splitting these out into a 
+  # TBD: Timelines followed by a user. Consider splitting these out into a 
   # separate class.
-  eventlines = ndb.KeyProperty(kind='Eventline', repeated=True)
+  timeline_ids = ndb.IntegerProperty(repeated=True)
 
