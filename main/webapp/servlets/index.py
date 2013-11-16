@@ -1,2 +1,4 @@
+from flask import render_template
+
 def run():
-  print "hello world"
+  return render_template("index.html")
