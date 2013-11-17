@@ -31,7 +31,6 @@ def create_timeline(user_id, name, description):
 #   None, TBD: raise exception on error.
 def add_event(user_id, timeline_id, name, description, start_time, end_time, 
               is_new_timeline=False):    
-  print timeline_id
   timeline = Timeline.get_by_id(timeline_id)
   if timeline is None:
     # TODO(dasarathi): create error handling, throw exceptions?
