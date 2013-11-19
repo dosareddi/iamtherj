@@ -9,6 +9,7 @@ import flask
 from webapp.servlets import add_event
 from webapp.servlets import create_user
 from webapp.servlets import create_timeline
+from webapp.servlets import view_timeline
 from webapp.servlets import index
 
 app = flask.Flask(__name__)
@@ -30,4 +31,8 @@ def create_timeline_handler():
 @app.route("/add_event", methods = ["GET", "POST"])
 def add_event_handler():
   return add_event.run() 
+
+@app.route("/view_timeline", methods = ["GET"])
+def view_timeline_handler():
+  return view_timeline.run() 
 

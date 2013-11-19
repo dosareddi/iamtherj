@@ -48,3 +48,11 @@ def add_event(user_id, timeline_id, name, description, start_time, end_time,
 
   timeline.events.append(event)
   timeline.put()
+
+# Get timeline from DB.
+# Arguments:
+#   timeline_id -- string, the user who creates this timeline.
+# Returns:
+#   Timeline object.
+def get_timeline(timeline_id):
+  return Timeline.get_by_id(timeline_id)
