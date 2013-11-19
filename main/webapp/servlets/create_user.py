@@ -2,7 +2,7 @@ from flask import redirect
 from flask import render_template
 from webapp.forms import CreateUserForm
 
-from api import users
+from logic import users
 
 # TODO(dasarathi): Create a base servlet class that has all the common crap 
 # setup, creating the display dictionary, importing stuff.
