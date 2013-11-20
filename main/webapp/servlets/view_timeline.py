@@ -2,7 +2,7 @@ from flask import redirect
 from flask import render_template
 from flask import request
 
-from api import eventlines
+from logic import eventlines
 
 # TODO(dasarathi): Create a base servlet class that has all the common crap 
 # setup, creating the display dictionary, importing stuff.

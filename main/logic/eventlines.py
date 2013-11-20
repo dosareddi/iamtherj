@@ -1,5 +1,5 @@
-from db.eventline_db import Event
-from db.eventline_db import Timeline
+from models.eventline_db import Event
+from models.eventline_db import Timeline
 import users
 
 # Add a new timeline for this user.
@@ -17,7 +17,7 @@ def create_timeline(user_id, name, description):
   timeline = Timeline(name=name, description=description, user_id=user_id)
   timeline_key = timeline.put()
   luser.timeline_ids.append(timeline_key.id())
-  return luser.put()
+  return timeline_key
 
 
 # Add a new event to a timeline.
@@ -47,7 +47,7 @@ def add_event(user_id, timeline_id, name, description, start_time, end_time,
     event.timeline_id = child_timeline.put().id()
 
   timeline.events.append(event)
-  timeline.put()
+  return timeline.put()
 
 # Get timeline from DB.
 # Arguments:

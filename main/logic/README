@@ -1,0 +1,3 @@
+This directory contains all the business logic for EventLine. 
+* Contains client independent logic
+* Data read-writes should go here

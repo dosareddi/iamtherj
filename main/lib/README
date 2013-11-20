@@ -1,0 +1,12 @@
+This directory has all the external dependencies in source form. 
+DO NOT EDIT ANY FILE IN THIS DIRECTORY.
+
+Current requirements.
+
+flask - 0.10.1
+flask-wtf - 0.9.3
+itsdangerous
+python-dateutil - 2.2
+six - 1.4.1
+wtforms - 1.0.5
+werkzeug - 0.9.4

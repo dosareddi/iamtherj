@@ -8,16 +8,36 @@ web.py - handler for web app. TODO(dosareddi): this could live within webapp/.
 
 api/ - client facing APIs.
 
-logic/ - eventline specific logic. TODO(dosareddi): this could live within api/.
-
-util/ - grab bag for utils.
-
-db/ - models.
+clientware/ - code that builds renderers using logic/ and renderers
 
 lib/ - all external dependencies.
+
+logic/ - eventline specific logic. 
+
+models/ - data models.
+
+renderers/ - objects for rendering web pages and apps, these will be converted 
+to json for api and templates for web page.
+
+util/ - grab bag for utils.
 
 webapp/ - all web application specific logic and servlet implementation.
 
 templates/ - templates for web application. TODO(dosareddi): this could live within webapp/.
+
+Directory structure mapped to tech stack
+-----------------------------------------
+
+              webapp   api
+
+              clientware
+
+        logic   renderers   util     
+
+              model
+ 
+
+
+
 
 

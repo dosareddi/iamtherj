@@ -1,5 +1,5 @@
-from db.eventline_db import Timeline
-from db.user_db import User
+from models.eventline_db import Timeline
+from models.user_db import User
 
 # Add a new user to the datastore.  
 # Arguments:
@@ -11,7 +11,7 @@ from db.user_db import User
 # TBD: Should these be attributes of the user object
 def create_user(name, user_id, email):
   new_user = User(name=name, user_id=user_id, email=email)
-  new_user.put()
+  return new_user.put()
   # TODO(dasarathi): Handle error cases.
 
 
