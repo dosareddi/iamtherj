@@ -17,7 +17,6 @@ def run():
   if not timeline_renderer:
     return redirect("/index")
     
-  display = {}
-  display["timeline"] = timeline_renderer
-  pprint(timeline_renderer)
-  return render_template("view_timeline.html", display=display)
+  pprint(timeline_renderer.__dict__)
+  return render_template("view_timeline.html", 
+                         timeline=timeline_renderer)

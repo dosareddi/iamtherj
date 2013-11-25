@@ -13,8 +13,8 @@ def get_timeline_renderer(timeline_id):
 
   events = []
   for event in timeline.events:
-    events.append(EventRenderer(event.name, event.description,
-                                event.start_time, event.end_time))
+    events.append(item_renderers.EventRenderer(
+      event.name, event.description, event.start_time, event.end_time))
     
   return item_renderers.TimelineRenderer(
     timeline.name, timeline.description, 

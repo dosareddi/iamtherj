@@ -22,9 +22,8 @@ handlers:
   static_files: static/robots.txt
   upload: static/robots.txt
 
-- url: /p/
-  static_dir: static/
-  expiration: 1000d
+- url: /static/css
+  static_dir: static/css
 
 - url: /.*
   script: web.app
