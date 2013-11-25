@@ -35,4 +35,3 @@ def add_event_handler():
 @app.route("/view_timeline", methods = ["GET"])
 def view_timeline_handler():
   return view_timeline.run() 
-

@@ -2,7 +2,8 @@ from flask import redirect
 from flask import render_template
 from flask import request
 
-from logic import eventlines
+from clientware import eventlines
+from pprint import pprint 
 
 # TODO(dasarathi): Create a base servlet class that has all the common crap 
 # setup, creating the display dictionary, importing stuff.
@@ -11,12 +12,11 @@ def run():
   if not timeline_id:
     return redirect("/index")
   
-  timeline = eventlines.get_timeline(int(timeline_id))
+  timeline_renderer = eventlines.get_timeline_renderer(int(timeline_id))
   # TODO(dasarathi): better error handling instead of redirecting.
-  if not timeline:
+  if not timeline_renderer:
     return redirect("/index")
     
-  display = {}
-  display["timeline"] = timeline
-
-  return render_template("view_timeline.html", display=display)
+  pprint(timeline_renderer.__dict__)
+  return render_template("view_timeline.html", 
+                         timeline=timeline_renderer)
