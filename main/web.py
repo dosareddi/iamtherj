@@ -7,13 +7,17 @@ in each servlet.
 import flask
 
 from webapp.servlets import add_event
+from webapp.servlets import authorized
 from webapp.servlets import create_user
 from webapp.servlets import create_timeline
-from webapp.servlets import view_timeline
 from webapp.servlets import index
+from webapp.servlets import signin
+from webapp.servlets import view_timeline
 
 app = flask.Flask(__name__)
 app.config.from_object("flask_config")
+app.jinja_env.line_statement_prefix = '#'
+app.jinja_env.line_comment_prefix = '##'
 
 @app.route("/")
 @app.route("/index")
@@ -35,3 +39,12 @@ def add_event_handler():
 @app.route("/view_timeline", methods = ["GET"])
 def view_timeline_handler():
   return view_timeline.run() 
+
+@app.route('/signin')
+def signin_handler():
+  return signin.run()
+
+@app.route('/authorized')
+def authorized_handler():
+  return authorized.run()
+

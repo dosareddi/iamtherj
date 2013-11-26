@@ -1,4 +1,4 @@
-from flask import render_template
+import flask
 
 def run():
-  return render_template("index.html")
+  return flask.render_template("index.html")

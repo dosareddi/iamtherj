@@ -11,8 +11,9 @@ from models.user_db import User
 # TBD: Should these be attributes of the user object
 def create_user(name, user_id, email):
   new_user = User(name=name, user_id=user_id, email=email)
-  return new_user.put()
-  # TODO(dasarathi): Handle error cases.
+  if new_user.put():
+    return new_user
+  return None
 
 
 # Fetch a user from the datastore.
