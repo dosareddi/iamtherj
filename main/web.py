@@ -13,6 +13,7 @@ from webapp.servlets import create_user
 from webapp.servlets import create_timeline
 from webapp.servlets import index
 from webapp.servlets import signin
+from webapp.servlets import signout
 from webapp.servlets import view_timeline
 
 from pprint import pprint
@@ -53,6 +54,10 @@ def signin_handler():
 @app.route('/authorized')
 def authorized_handler():
   return authorized.run()
+
+@app.route('/signout/')
+def signout_handler():
+  return signout.run()
 
 # Logins
 # ------

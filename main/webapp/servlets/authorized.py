@@ -13,7 +13,6 @@ def run():
     flask.flash(u'You denied the request to sign in.')
     return flask.redirect("/index")
 
-  pprint.pprint(google_user)
   google_id = str(google_user.user_id())
   name = google_user.nickname()
   email = google_user.email()
