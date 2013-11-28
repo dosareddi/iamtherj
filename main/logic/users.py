@@ -4,27 +4,37 @@ from models.user_db import User
 # Add a new user to the datastore.  
 # Arguments:
 #   name -- string
-#   user_id -- string.
 #   email -- string.
+#   google_id -- string, google_user.user_id()
 # Returns:
 #   TODO(dasarathi): Check and return error.
 # TBD: Should these be attributes of the user object
-def create_user(name, user_id, email):
-  new_user = User(name=name, user_id=user_id, email=email)
+def create_user(name, email, google_id=None):
+  new_user = User(name=name, email=email, google_id=google_id)
   if new_user.put():
     return new_user
   return None
 
 
-# Fetch a user from the datastore.
+# Fetch a user from the datastore given id.
 # Arguments:
-#   user_id -- string.
+#   id -- string or integer form of NDB id.
 # Returns:
-# TODO(dasarathi): Check and return error.
-def get_user(user_id):
-  # TODO(dasarathi): This is not fast since we only have one user by user_id.
-  # Check https://developers.google.com/appengine/docs/python/ndb/queries#filter_by_prop
-  return User.query(User.user_id == user_id).get()
+#   User object if exists, None otherwise
+def get_user(id):
+  key_id = id
+  if type(id) != int:
+    key_id = int(id)
+  return User.get_by_id(key_id)
+
+
+# Fetch a user from the datastore given google id.
+# Arguments:
+#   google_id -- string form of google id.
+# Returns:
+#   User object if exists, None otherwise
+def get_user_by_google_id(google_id):
+  return User.query(User.google_id == google_id).get()
 
   
 # Get all timelines belonging to this user from the datastore.

@@ -1,6 +1,9 @@
 import flask
+from flask.ext import login
 from google.appengine import api
 from logic import users
+
+from models.user_db import User
 
 import pprint
 
@@ -9,14 +12,16 @@ def run():
   if google_user is None:
     flask.flash(u'You denied the request to sign in.')
     return flask.redirect("/index")
+
   pprint.pprint(google_user)
-  user_id = google_user.user_id()
+  google_id = str(google_user.user_id())
   name = google_user.nickname()
   email = google_user.email()
-  luser = users.get_user(user_id)
+  luser = users.get_user_by_google_id(google_id)
   if not luser:
-    luser = users.create_user(name, user_id, email)
-
-  flask.flash("Hello %s !!!" % (name))
-  
+    luser = users.create_user(name, email, google_id=google_id)
+  if login.login_user(luser):
+    flask.flash("Hello %s !!!" % (login.current_user.name))
+  else:
+    flask.flash("Login Fail")
   return flask.redirect("/index")
