@@ -18,8 +18,7 @@
   </head>
 
   <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
+    <nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="icon-bar"></span>
@@ -28,11 +27,21 @@
           </button>
           <a class="navbar-brand" href="#">EventLine</a>
         </div>
+	<div class="collapse navbar-collapse">
+          # include "bit/user_menu.html"
+	</div>
+  </nav>
+      # for message in get_flashed_messages(with_categories=True)
+      <div class="alert alert-success alert-dismissable">
+	<button type="button" class="close" data-dismiss="alert"
+		aria-hidden="true">&times;</button>
+	{{ message[1] }}
       </div>
-    </div>
+      # endfor
 
     <!--Other templates dump stuff here -->
-    {% block content %}{% endblock %}
+    {% block content %}
+    {% endblock %}
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
