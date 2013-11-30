@@ -29,7 +29,7 @@ class Timeline(ndb.Model):
   end_time = ndb.DateTimeProperty()
 
   # Owner of this timeline. TBD: Need one for original author.
-  user_id = ndb.StringProperty(indexed=True, required=True)
+  user_id = ndb.IntegerProperty(indexed=True, required=True)
 
   events = ndb.LocalStructuredProperty(Event, repeated=True)  
 

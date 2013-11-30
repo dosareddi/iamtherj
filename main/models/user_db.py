@@ -16,6 +16,9 @@ class User(ndb.Model):
   # separate class.
   timeline_ids = ndb.IntegerProperty(repeated=True)
 
+  def id(self):
+    return self.key.id()
+
   # Routines required for flask login implementation.
   def is_authenticated(self):
     return True
@@ -28,3 +31,4 @@ class User(ndb.Model):
 
   def get_id(self):
     return unicode(self.key.id())
+

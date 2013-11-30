@@ -1,3 +1,4 @@
+from flask.ext import login
 from flask.ext.wtf import Form
 from wtforms import TextField, BooleanField, IntegerField
 from wtforms import validators 
@@ -10,7 +11,6 @@ class CreateUserForm(Form):
 
 class CreateTimelineForm(Form):
   name = TextField('name', validators = [validators.Required()])
-  user_id = TextField('user_id', validators = [validators.Required()])
   description = TextField('description', validators = [validators.Required()])
   
 class AddEventForm(Form):
