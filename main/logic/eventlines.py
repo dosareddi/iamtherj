@@ -17,7 +17,7 @@ def create_timeline(user_id, name, description):
   timeline = Timeline(name=name, description=description, user_id=user_id)
   timeline_key = timeline.put()
   luser.timeline_ids.append(timeline_key.id())
-  return timeline_key
+  return timeline_key.id()
 
 
 # Add a new event to a timeline.

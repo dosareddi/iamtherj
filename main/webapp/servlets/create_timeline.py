@@ -1,4 +1,5 @@
 import flask
+from flask import jsonify
 from flask import redirect
 from flask import render_template
 from flask.ext import login
@@ -11,10 +12,11 @@ from logic import eventlines
 def run():
   form = CreateTimelineForm()
   if form.validate_on_submit():
-    eventlines.create_timeline(user_id=login.current_user.id(), 
-                               name=form.name.data, 
-                               description=form.description.data)
+    timeline_id = eventlines.create_timeline(user_id=login.current_user.id(), 
+                                             name=form.name.data, 
+                                             description=form.description.data)
     flask.flash("Timeline created")
-    return redirect(flask.url_for("index"))
-
-  return render_template("create_timeline.html", form=form)
+    return jsonify(timeline=timeline_id)
+  else:
+    flask.flash("Failed to create timeline")
+    return render_template("create_timeline.html", form=form)
