@@ -1,9 +1,8 @@
 body {
-  background-color:#e0e0e0;
   padding-top: 50px;
+  padding-bottom: 20px;
 }
 
-.navbar-inner{
-  text-align:center;
+.search-box {
+  padding-right: 0px;
 }
-
