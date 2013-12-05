@@ -22,50 +22,53 @@
 
   </head>
 
-  <body>
-   
-    <div class="navbar navbar-default navbar-fixed-top" 
+  <body>   
+    <!-- TODO(dasarathi): Create Timeline Modal goes here because of
+    known issue with modals within some div -->
+    # include "bit/create_timeline_modal.html"
+
+    <div class="navbar navbar-default navbar-inverse navbar-fixed-top" 
 	 role="navigation">
-    <div class="container">
-      <div class="navbar-header">
-	<button type="button" class="navbar-toggle" 
-		data-toggle="collapse"
-		data-target=".navbar-collapse">
-		<span class="sr-only">Toggle navigation</span>
-		<span class="icon-bar"></span>
-		<span class="icon-bar"></span>
-		<span class="icon-bar"></span>
-	</button>
-        <a class="navbar-brand" href="#">EventLine</a>
-      </div>	
-      <div class="navbar-collapse collapse">
-	<div class="col-sm-4 col-md-4 navbar-left search-box">
-	  <form class="navbar-form" role="search">
-	    <div class="input-group">
-	      <input type="text" class="form-control"
-		     placeholder="Find a timeline.."
-		     name="srch-term" id="srch-term">
-	      </input>
-	      <div class="input-group-btn">
-		<button type="submit" class="btn btn-default"> 
-		  <i class="glyphicon glyphicon-search"></i>
-		</button>
-	      </div>
-            </div>
-	  </form>
-	</div>
+	 <div class="container">
+	   <div class="navbar-header">
+	     <button type="button" class="navbar-toggle" 
+		     data-toggle="collapse"
+		     data-target=".navbar-collapse">
+		     <span class="sr-only">Toggle navigation</span>
+		     <span class="icon-bar"></span>
+		     <span class="icon-bar"></span>
+		     <span class="icon-bar"></span>
+	     </button>
+             <a class="navbar-brand" href="#">EventLine</a>
+	   </div>	
+	   <div class="navbar-collapse collapse">
+	     <div class="col-sm-4 col-md-4 navbar-left search-box">
+	       <form class="navbar-form" role="search">
+		 <div class="input-group">
+		   <input type="text" class="form-control"
+			  placeholder="Find a timeline.."
+			  name="srch-term" id="srch-term">
+		   </input>
+		   <div class="input-group-btn">
+		     <button type="submit" class="btn btn-default"> 
+		       <i class="glyphicon glyphicon-search"></i>
+		     </button>
+		   </div>
+		 </div>
+	       </form>
+	     </div>
 	
-	<a class="btn btn-default navbar-btn" 
-           data-toggle="modal" data-target="#createTimelineModal" 
-           role="button"> Create a Timeline </a>
+	     <a class="btn btn-default navbar-btn" 
+		data-toggle="modal" data-target="#createTimelineModal" 
+		role="button"> Create a Timeline </a>
 	   
-	# include "bit/user_menu.html"
-      </div>
-    </div>    
+		# include "bit/user_menu.html"
+	   </div> <!-- /navbar-collapse -->    
+	 </div> <!-- /container -->
+    </div> <!-- /navbar-fixed-top -->    
     <!--Other templates dump stuff here -->
     {% block content %}
     {% endblock %}
-    </div> <!-- /container -->    
 
     # for message in get_flashed_messages(with_categories=True)
     <div class="alert alert-success alert-dismissable">
@@ -74,7 +77,6 @@
 	      {{ message[1] }}
     </div>
     # endfor
-
 
   </body>
 </html>
