@@ -1,4 +1,4 @@
-<div class="modal fade" id="createTimelineModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="create-timeline-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -16,7 +16,6 @@
 	       role="button"> Sign in </a>
 	  </form>
 	</div>      
-
       # elif form
 	<div class="modal-body">
 
@@ -52,13 +51,15 @@
 	                 var delay = 200;
                          setTimeout(
 	                   function(){
-	                    alert("got back response" + xhr.responseText);
-	    
+	                     obj = JSON.parse(xhr.responseText);
+	                     alert("got back timeline " + obj.timeline  );
+	                     window.location.href =
+	                       "/view_timeline?timeline=" + obj.timeline;
                            }, 
                            delay
                          );
                          // Hide the modal
-	                 $("#create-timeline-form").modal("hide");
+	                 $("#create-timeline-modal").modal("hide");
                        }
                 );
    	        // Stop the normal form submission

@@ -1,8 +1,9 @@
 body {
-  padding-top: 50px;
   padding-bottom: 20px;
+  background: url(/static/img/old_moon.png) repeat 0 0;
 }
 
 .search-box {
   padding-right: 0px;
+  padding-left: 0px;
 }

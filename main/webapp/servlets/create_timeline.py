@@ -15,8 +15,7 @@ def run():
     timeline_id = eventlines.create_timeline(user_id=login.current_user.id(), 
                                              name=form.name.data, 
                                              description=form.description.data)
-    flask.flash("Timeline created")
     return jsonify(timeline=timeline_id)
   else:
     flask.flash("Failed to create timeline")
-    return render_template("create_timeline.html", form=form)
+    return render_template("index.html")
