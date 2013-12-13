@@ -18,4 +18,4 @@ def run():
     return jsonify(timeline=timeline_id)
   else:
     flask.flash("Failed to create timeline")
-    return render_template("index.html")
+    return jsonify()

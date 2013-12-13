@@ -17,7 +17,7 @@ def get_timeline_renderer(timeline_id):
       event.name, event.description, event.start_time, event.end_time))
     
   return item_renderers.TimelineRenderer(
-    timeline.name, timeline.description, 
+    timeline.name, timeline_id, timeline.description, 
     timeline.start_time, timeline.end_time, events)
 
 
