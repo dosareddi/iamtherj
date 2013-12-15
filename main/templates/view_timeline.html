@@ -3,33 +3,88 @@
 
 <!--main-->
 <div class="container" id="main">
-  <div class="row level1"> 
-    <div class="col-md-9">           
-      <h4> {{ timeline.name }} </h4>
-      <hr>
-      {{ timeline.description }}
-      <hr>
-	<div class="row level2"> 	
-	  <div class="col-md-8 col-sm-3">       
-	    {% for event in timeline.events %}
-              <div class="panel panel-default">
-		<div class="panel-heading"> 
-		  <h5> {{ event.name }} </h5>
-		</div>
-   		<div class="panel-body">
-		  <a href="#">Placeholder</a>
-		  <img src="http://placehold.it/120x90/3333CC/FFF"
-		       class="img-responsive img-thumbnail
-		       pull-right">		       
-		    <p>event.description</p>
-              <div class="clearfix"></div>
-		</div>
-              </div> 
-	    {% endfor %}
-	  </div> <!--/col-md-8 col-sm-3-->
-	</div> <!--/row level1-->
-    </div> <!--/col-md-9 col-sm-4-->
-  </div> <!--/row level2-->
+  <div class="row main-grid"> 
+    <div class="col-md-8 col-lg-8"> 
+
+      <div class="panel panel-default">      
+	<div class="panel-heading"> 
+	  <h4> {{ timeline.name }} </h4>
+	</div>
+   	<div class="panel-body">
+	  {{ timeline.description }}		
+	  </div>
+      </div>
+
+	{% for event in timeline.events %}
+          <div class="panel panel-default">
+	    <div class="panel-heading"> 
+	      <h5> {{ event.name }} </h5>
+	    </div>
+   	    <div class="panel-body">
+	      <a href="#">Placeholder</a>
+	      <img src="http://placehold.it/120x90/3333CC/FFF"
+		   class="img-responsive img-thumbnail
+		   pull-right">		       
+		   <p> {{ event.description }} </p>
+		   <div class="clearfix"></div>
+	    </div>
+          </div> 
+	{% endfor %}
+	
+	<div class="well">
+	  <form class="form-horizontal" id="add-event-form" 
+		method="post" data-remote="true" role="form">
+	    {{add_event_form.hidden_tag()}}
+	    <h4>Add new event</h4>
+	    <hr/>
+	    <div class="form-group" style="padding:14px;">
+	      <label for="name">Name</label>
+	      {{add_event_form.name(class="form-control")}}
+	    </div>
+	    <div class="form-group" style="padding:14px;">
+	      <label for="description">Description</label>
+              {{add_event_form.description(class="form-control", rows="3")}}
+            </div>            
+            <button class="btn btn-success pull-right"
+		    id="add-event-form-submit"
+		    href="#"
+		    type="button">
+		    Add
+	    </button>
+	    <ul class="list-inline"><li><a href="#"><i class="glyphicon glyphicon-align-left"></i></a></li><li><a href="#"><i class="glyphicon glyphicon-align-center"></i></a></li><li><a href="#"><i class="glyphicon glyphicon-align-right"></i></a></li></ul>	    
+	  </form>
+
+	  <script>	    
+	    $("#add-event-form-submit").on(
+	      "click", 
+	      function(e) {
+	        // We don"t want this to act as a link so cancel the link action
+	        e.preventDefault();
+                $.post("/add_event?timeline=" + {{ timeline.id }}, 
+	               $("#add-event-form").serialize(), 
+	               function(data, status, xhr){
+	                 var delay = 200;
+                         setTimeout(
+	                   function(){
+	                     alert("added event ");
+	                     window.location.href =
+	                       "/view_timeline?timeline=" + {{ timeline.id }};
+                           }, 
+                           delay
+                         );
+                       }
+                );
+   	        // Stop the normal form submission
+	        return false;
+             }
+	  );
+	</script>
+
+	</div>
+
+    </div> <!--/col-md-8 col-lg-8 -->
+
+  </div> <!--/row-->
 </div> <!--/main-->
 
 {% endblock %}

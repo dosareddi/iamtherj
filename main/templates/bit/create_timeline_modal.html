@@ -1,0 +1,79 @@
+<div class="modal fade" id="create-timeline-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"> Start a new timeline</h4>
+      </div>
+
+      # if not current_user.is_authenticated()
+
+        <div class="modal-body">
+	  <form class="form-inline">
+	    Please sign in to proceed.
+
+	    <a class="btn btn-primary" href="/signin" 
+	       role="button"> Sign in </a>
+	  </form>
+	</div>      
+      # elif form
+	<div class="modal-body">
+
+	  <form role="form" name="create-timeline" data-remote="true"
+		id="create-timeline-form"
+		method="post">
+	    {{form.hidden_tag()}}
+	    <div class="form-group">
+	      <label for="name">Timeline Name</label> <br/>
+	      {{form.name(class="form-control")}}
+	    </div>
+	    <div class="form-group">
+	      <label for="description">Timeline descrption</label><br/>
+	      {{form.description(class="form-control")}}
+	    </div>
+	</form>
+	</div>
+	  <div class="modal-footer">
+	    <a id="create-timeline-form-submit" 
+	       class="btn btn-primary" href="#">Create</a>
+	  </div>
+
+	  <script>	    
+	    $("#create-timeline-form-submit").on(
+	      "click", 
+	      function(e) {
+	        // We don"t want this to act as a link so cancel the link action
+	        e.preventDefault();
+	    
+                $.post("/create_timeline", 
+	               $("#create-timeline-form").serialize(), 
+	               function(data, status, xhr){
+	                 var delay = 200;
+                         setTimeout(
+	                   function(){
+	                     obj = JSON.parse(xhr.responseText);
+	                     alert("got back timeline " + obj.timeline  );
+	                     window.location.href =
+	                       "/view_timeline?timeline=" + obj.timeline;
+                           }, 
+                           delay
+                         );
+                         // Hide the modal
+	                 $("#create-timeline-modal").modal("hide");
+                       }
+                );
+   	        // Stop the normal form submission
+	        return false;
+             }
+	  );
+	</script>
+
+
+      # endif        
+	
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+

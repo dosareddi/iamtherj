@@ -3,50 +3,84 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" 
+	  content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
 
     <title>EventLine</title>
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet"
-	  href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <!-- Custom styles for this template -->
     <link rel="stylesheet" 
-	  href="/static/css/base.css">
+	  href="/static/css/lib/bootstrap.css">
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="/static/css/base.css">
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+
   </head>
 
-  <body>
-    <nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">EventLine</a>
-        </div>
-	<div class="collapse navbar-collapse">
-          # include "bit/user_menu.html"
-	</div>
-  </nav>
-      # for message in get_flashed_messages(with_categories=True)
-      <div class="alert alert-success alert-dismissable">
-	<button type="button" class="close" data-dismiss="alert"
-		aria-hidden="true">&times;</button>
-	{{ message[1] }}
-      </div>
-      # endfor
+  <body>   
+    <!-- TODO(dasarathi): Create Timeline Modal goes here because of
+    known issue with modals within some div -->
+    # include "bit/create_timeline_modal.html"
+
+    <div class="navbar navbar-default navbar-inverse" 
+	 role="navigation">
+	 <div class="container">
+	   <div class="navbar-header">
+	     <button type="button" class="navbar-toggle" 
+		     data-toggle="collapse"
+		     data-target=".navbar-collapse">
+		     <span class="sr-only">Toggle navigation</span>
+		     <span class="icon-bar"></span>
+		     <span class="icon-bar"></span>
+		     <span class="icon-bar"></span>
+	     </button>
+             <a class="navbar-brand" href="#">EventLine</a>
+	   </div>	
+	   <div class="navbar-collapse collapse">
+	     <div class="col-sm-4 col-md-4 navbar-left search-box">
+	       <form class="navbar-form" role="search">
+		 <div class="input-group">
+		   <input type="text" class="form-control"
+			  placeholder="Find a timeline.."
+			  name="srch-term" id="srch-term">
+		   </input>
+		   <div class="input-group-btn">
+		     <button type="submit" class="btn btn-default"> 
+		       <i class="glyphicon glyphicon-search"></i>
+		     </button>
+		   </div>
+		 </div>
+	       </form>
+	     </div>
+	
+	     <a class="btn btn-default navbar-btn " 
+		data-toggle="modal" data-target="#create-timeline-modal" 
+		role="button">
+		<span class="glyphicon glyphicon-edit"></span> 
+		Create a Timeline </a>
+	   
+		# include "bit/user_menu.html"
+	   </div> <!-- /navbar-collapse -->    
+	 </div> <!-- /container -->
+    </div> <!-- /navbar-fixed-top -->    
+
+    # for message in get_flashed_messages(with_categories=True)
+    <div class="alert alert-success alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert"
+	      aria-hidden="true">&times;</button>
+	      {{ message[1] }}
+    </div>
+    # endfor
 
     <!--Other templates dump stuff here -->
     {% block content %}
     {% endblock %}
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+
   </body>
 </html>

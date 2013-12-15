@@ -1,13 +1,14 @@
 # extends "base.html"
 # block content
 
-<!-- Main jumbotron for a primary marketing message or call to action -->
-<div class="jumbotron">
-  <div class="container">
+<!-- Main jumbotron for a primary marketing message or call to action --
+  -- -->
+<div class="container">
+  <div class="jumbotron">
     # if current_user.name
-      <h1>Hello, {{current_user.name}} !</h1>
+    <h1>Hello, {{current_user.name}} !</h1>
     # else
-      <h1>Hello, world!</h1>
+    <h1>Hello, world!</h1>
     # endif
   </div>
 </div>

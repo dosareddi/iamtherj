@@ -1,4 +1,5 @@
 import flask
+from flask import request
 from flask.ext import login
 from google.appengine import api
 from logic import users
@@ -20,7 +21,9 @@ def run():
   if not luser:
     luser = users.create_user(name, email, google_id=google_id)
   if login.login_user(luser):
-    flask.flash("Hello %s !!!" % (login.current_user.name))
+    flask.get_flashed_messages()
+    return flask.redirect(request.args.get("next") or
+                          flask.url_for("index"))
   else:
     flask.flash("Login Fail")
-  return flask.redirect("/index")
+    return flask.redirect(flask.url_for("index"))

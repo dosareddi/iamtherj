@@ -1,6 +1,7 @@
 from models.eventline_db import Event
 from models.eventline_db import Timeline
 import users
+import datetime
 
 # Add a new timeline for this user.
 # Arguments:
@@ -17,7 +18,7 @@ def create_timeline(user_id, name, description):
   timeline = Timeline(name=name, description=description, user_id=user_id)
   timeline_key = timeline.put()
   luser.timeline_ids.append(timeline_key.id())
-  return timeline_key
+  return timeline_key.id()
 
 
 # Add a new event to a timeline.
@@ -29,12 +30,15 @@ def create_timeline(user_id, name, description):
 #   end_time -- datetime, start of event  
 # Returns:
 #   None, TBD: raise exception on error.
-def add_event(user_id, timeline_id, name, description, start_time, end_time, 
-              is_new_timeline=False):    
+def add_event(user_id, timeline_id, name, description, start_time=None, 
+              end_time=None, is_new_timeline=False):    
   timeline = Timeline.get_by_id(timeline_id)
   if timeline is None:
+    print "no timeline"
     # TODO(dasarathi): create error handling, throw exceptions?
-    return
+    return None
+  start_time = datetime.datetime.strptime("2014/03/01", "%Y/%m/%d")
+  end_time = datetime.datetime.strptime("2014/03/01", "%Y/%m/%d")
 
   event = Event(name=name, description=description, start_time=start_time,
                 end_time=end_time)
