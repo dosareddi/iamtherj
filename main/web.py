@@ -53,7 +53,6 @@ def create_timeline():
 def add_event():
   return add_event_handler.run() 
 
-
 @app.route("/signin")
 def signin():
   return signin_handler.run()
