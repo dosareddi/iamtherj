@@ -1,7 +1,6 @@
 import flask
 
 from flask import redirect
-from flask import render_template
 from flask import request
 from clientware import eventlines
 from pprint import pprint 
@@ -22,6 +21,5 @@ def run():
     return redirect("/index")
 
   add_event_form = forms.AddEventForm()
-  return render_template("view_timeline.html", 
-                         timeline=timeline_renderer, 
-                         add_event_form=add_event_form)
+  return dict(timeline=timeline_renderer, 
+              add_event_form=add_event_form)
