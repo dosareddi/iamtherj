@@ -11,8 +11,7 @@ class CreateUserForm(Form):
 
 class CreateTimelineForm(Form):
   name = TextField('name', validators = [validators.Required()])
-  description = TextAreaField('description', 
-                              validators = [validators.Required()])
+  description = TextAreaField('description', validators = [])
   
 class AddEventForm(Form):
   name = TextField('name', validators = [validators.Required()])
