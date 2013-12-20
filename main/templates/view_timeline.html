@@ -66,6 +66,31 @@
 		      </button>
 		      <ul class="list-inline"><li><a href="#"><i class="glyphicon glyphicon-align-left"></i></a></li><li><a href="#"><i class="glyphicon glyphicon-align-center"></i></a></li><li><a href="#"><i class="glyphicon glyphicon-align-right"></i></a></li></ul>	    
 		</form>	      
+      	        <script>	    
+		  $("#add-event-form-submit").on(
+		  "click", 
+		  function(e) {
+	          // We don"t want this to act as a link so cancel the link action
+	          e.preventDefault();
+                  $.post("/add_event?timeline=" + {{ timeline.id }}, 
+	          $("#add-event-form").serialize(), 
+	          function(data, status, xhr){
+	          var delay = 200;
+                  setTimeout(
+	          function(){
+	          alert("added event ");
+	          window.location.href =
+	          "/view_timeline?timeline=" + {{ timeline.id }};
+                  }, 
+                  delay
+                  );
+                  }
+                  );
+   	          // Stop the normal form submission
+	          return false;
+		  }
+		  );
+		</script>
 	      </div> <!-- well -->
 	    </div> <!-- col-lg-9 col-md-9 -->	    
 	  </div>  <!--row timeline-body-row -->	
