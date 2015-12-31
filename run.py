@@ -10,14 +10,7 @@ def hello():
  
     resp = twilio.twiml.Response()
     # Greet the caller by name
-    resp.say("Hello")
-    # Play an mp3
-
- 
-    # Say a command, and listen for the caller to press a key. When they press
-    # a key, redirect them to /handle-key.
-    with resp.gather(numDigits=1, action="/handle-key", method="POST") as g:
-        g.say("To speak to a real person, press 1.")
+    resp.message("Hello ")
  
     return str(resp)
  
