@@ -1,4 +1,5 @@
 from flask import Flask, request, redirect
+from firebase import firebase
 import twilio.twiml
  
 app = Flask(__name__)
@@ -9,11 +10,11 @@ def hello():
     number = request.values.get('From', None)
     message = request.values.get('Body', None)
     path = "/conversations/" + str(number)
-    firebase = firebase.FirebaseApplication('https://burning-torch-4695.firebaseio.com', None)
-    result = firebase.post(path, number, {'msg': message})
+    fb = firebase.FirebaseApplication('https://burning-torch-4695.firebaseio.com', None)
+    result = fb.post(path, {'msg': message})
     print result
     resp = twilio.twiml.Response()
-    resp.message(result)
+    resp.message(str(result))
  
     return str(resp)
   
