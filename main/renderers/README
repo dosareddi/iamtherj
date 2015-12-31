@@ -1,4 +1,0 @@
-This directory is for pure python objects that describe what is necessary for
-rendering something on the client. 
-For e.g. TimelineRenderer for timeline object.
-The exact styling of rendering of the object is left upto the client.

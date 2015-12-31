@@ -1,3 +1,0 @@
-This directory has modules responsible for building renderers for web pages and
-apps based off model objects returned by logic layer.
-e.g. viewing a timeline will involve building a TimelineRenderer from a Timeline model.
