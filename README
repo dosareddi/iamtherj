@@ -9,4 +9,6 @@ git add ...
 git commit ..
 git push origin <branch>
 
-
+Github starting afresh
+----------------------
+To associate to your heroku repo, heroku git:remote -a giftforce

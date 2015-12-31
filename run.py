@@ -10,7 +10,7 @@ def hello():
  
     resp = twilio.twiml.Response()
     # Greet the caller by name
-    resp.message("Hello ")
+    resp.message("Hello Otha")
  
     return str(resp)
   
