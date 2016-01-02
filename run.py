@@ -11,7 +11,7 @@ app = Flask(__name__)
 @app.route("/", methods=['GET', 'POST'])
 def hello():
     number = request.values.get('From', None)
-    slack_channel = "#" + str(number)
+    slack_channel = "#" + str(number)[1:]
     message = request.values.get('Body', None)
 
 #    Saving the conversation in firebase.
