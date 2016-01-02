@@ -20,8 +20,8 @@ def hello():
 #    result = fb.post(path, {'msg': message})
 #    print result
 
-     resp = twilio.twiml.Response()
-     resp.message("ok")
+    resp = twilio.twiml.Response()
+    resp.message("ok")
 
     sc = SlackClient("xoxp-12574501523-12578409008-17628102802-e267e28b16")
     if sc != None:
