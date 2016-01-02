@@ -40,7 +40,7 @@ def process_slack(kwargs):
     In this case, you need to return a dict.'''
     client = TwilioRestClient(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
     message = client.messages.create(to="+" + kwargs["channel_name"], from_="+12139153611",
-                                     body=kwargs["text"])
+                                     body=kwargs["text"][len("outgoing"):])
     return {"text": "!sent"}
 
 def filter_slack(text):
