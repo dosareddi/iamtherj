@@ -19,13 +19,14 @@ def hello():
 #    fb = firebase.FirebaseApplication('https://burning-torch-4695.firebaseio.com', None)
 #    result = fb.post(path, {'msg': message})
 #    print result
-#    resp = twilio.twiml.Response()
-#    resp.message(str(result))
+
+     resp = twilio.twiml.Response()
+     resp.message("ok")
 
     sc = SlackClient("xoxp-12574501523-12578409008-17628102802-e267e28b16")
     if sc != None:
         sc.api_call("chat.postMessage", channel=slack_channel, text=message) 
-    return ""
+    return str(resp)
   
 if __name__ == "__main__":
     app.run(debug=True)
