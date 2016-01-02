@@ -21,11 +21,13 @@ def hello():
 #    print result
 
     resp = twilio.twiml.Response()
-    resp.message("ok")
 
     sc = SlackClient("xoxp-12574501523-12578409008-17628102802-e267e28b16")
     if sc != None:
         sc.api_call("chat.postMessage", channel=slack_channel, text=message) 
+        resp.message("ok")
+    else:
+        resp.message("fail")
     return str(resp)
   
 if __name__ == "__main__":
