@@ -24,8 +24,8 @@ def hello():
 
     sc = SlackClient("xoxp-12574501523-12578409008-17628102802-e267e28b16")
     if sc != None:
-        sc.api_call("chat.postMessage", channel=slack_channel, text=message) 
-        resp.message("ok")
+        sr = sc.api_call("chat.postMessage", channel=slack_channel, text=message)         
+        resp.message(sr["ok"])
     else:
         resp.message("fail")
     return str(resp)
