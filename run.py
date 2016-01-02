@@ -51,9 +51,9 @@ def filter_slack(text):
  
 @app.route("/", methods=["GET", "POST"])
 def hello():
-    number = request.values.get('From', None)
+    number = request.values.get("From", None)
     slack_channel = "#" + str(number)[1:]
-    message = request.values.get('Body', None)
+    message = request.values.get("Body", None)
 
 #    Saving the conversation in firebase.
 #    path = "/conversations/" + str(number)
@@ -62,11 +62,10 @@ def hello():
 #    print result
 
     resp = twilio.twiml.Response()
-
     sc = SlackClient("xoxp-12574501523-12578409008-17628102802-e267e28b16")
     if sc != None:
         sr = sc.api_call("chat.postMessage", channel=slack_channel, text=message)         
-        resp.message(slack_channel)
+        resp.message("")
     else:
         resp.message("fail")
     return str(resp)
