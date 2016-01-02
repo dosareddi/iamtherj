@@ -39,9 +39,9 @@ def process_slack(kwargs):
     This function shows response the slack post directly without an extra post.
     In this case, you need to return a dict.'''
     client = TwilioRestClient(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
-    message = client.messages.create(to="+" + channel_name, from_="+12139153611",
-                                     body=kwargs[text])
-    return {'text': '!sent'}
+    message = client.messages.create(to="+" + kwargs["channel_name"], from_="+12139153611",
+                                     body=kwargs["text"])
+    return {"text": "!sent"}
 
 def filter_slack(text):
     '''
