@@ -74,7 +74,7 @@ def slack_incoming():
     number = request.values.get("channel_name", None)
     client = TwilioRestClient(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
     message = client.messages.create(to="+" + number, from_="+12139153611",
-                                     body=text)
+                                     body=message)
     return number
 
 slackbot.set_handler(process_slack)
