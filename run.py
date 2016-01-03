@@ -85,5 +85,11 @@ def slack_incoming():
 slackbot.set_handler(process_slack)
 slackbot.filter_outgoing(filter_slack)
   
+sc = SlackClient("xoxp-12574501523-12578409008-17628102802-e267e28b16")
+if sc.rtm_connect():
+   while True:
+       print sc.rtm_read()
+       time.sleep(0.5)
+
 if __name__ == "__main__":
     app.run(debug=True)
