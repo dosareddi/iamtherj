@@ -100,4 +100,3 @@ while True:
                                              body=m["text"])
             
     time.sleep(0.5)
-    sc.rtm_connect()
