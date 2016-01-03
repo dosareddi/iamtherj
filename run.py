@@ -82,6 +82,10 @@ def slack_incoming():
                                      body=message)
     return ""
 
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
 slackbot.set_handler(process_slack)
 slackbot.filter_outgoing(filter_slack)
   
@@ -96,7 +100,4 @@ while True:
                                              body=m["text"])
             
     time.sleep(0.5)
-    sc.rtm_connect(reconnect=True)
-
-if __name__ == "__main__":
-    app.run(debug=True)
+    sc.rtm_connect()
