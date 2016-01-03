@@ -65,10 +65,17 @@ def hello():
     sc = SlackClient("xoxp-12574501523-12578409008-17628102802-e267e28b16")
     if sc != None:
         sr = sc.api_call("chat.postMessage", channel=slack_channel, text=message)         
-        resp.message("")
     else:
-        resp.message("fail")
-    return str(resp)
+        return resp.message("fail")
+
+@app.route("/slack_incoming", methods=["GET", "POST"])
+def hello():
+    message = request.values.get("text", None)
+    number = request.values.get("channel_name", None)
+    client = TwilioRestClient(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
+    message = client.messages.create(to="+" + number, from_="+12139153611",
+                                     body=text)
+    return number
 
 slackbot.set_handler(process_slack)
 slackbot.filter_outgoing(filter_slack)
