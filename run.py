@@ -61,12 +61,17 @@ def hello():
 #    result = fb.post(path, {'msg': message})
 #    print result
 
+    
     resp = twilio.twiml.Response()
     sc = SlackClient("xoxp-12574501523-12578409008-17628102802-e267e28b16")
+    
     if sc != None:
         sr = sc.api_call("chat.postMessage", channel=slack_channel, text=message)         
     else:
         return resp.message("fail")
+    sr = sc.api_call("channels.create", name="12134468877")
+    return resp.message(str(sr))
+
 
 @app.route("/slack_incoming", methods=["GET", "POST"])
 def slack_incoming():
