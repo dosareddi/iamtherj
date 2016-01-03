@@ -69,7 +69,7 @@ def hello():
         return resp.message("fail")
 
 @app.route("/slack_incoming", methods=["GET", "POST"])
-def hello():
+def slack_incoming():
     message = request.values.get("text", None)
     number = request.values.get("channel_name", None)
     client = TwilioRestClient(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
