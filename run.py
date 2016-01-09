@@ -28,7 +28,7 @@ def create_channel(channel_name):
         return
     print channel_name
     print response
-    print "channel creation fail"
+    print "channel creation failed"
 
 
 @app.route("/", methods=["GET", "POST"])
