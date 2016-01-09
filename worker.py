@@ -30,7 +30,7 @@ while True:
     for m in messages:   
         if m["type"] == "message" and m.get("subtype", "") != "bot_message":
             client = TwilioRestClient(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
-            get_channel_number(m["channel"]
+            get_channel_number(m["channel"])
             message = client.messages.create(to="+" + "12134469422", from_="+12139153611",
                                              body=m["text"])
             
