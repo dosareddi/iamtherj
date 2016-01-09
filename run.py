@@ -7,17 +7,7 @@ from twilio.rest import TwilioRestClient
 import twilio.twiml
 import time
 
-TWILIO_ACCOUNT_SID="AC3de92c17107049aece1a2378b84b3e38"
-TWILIO_AUTH_TOKEN="10f150926cea141e336ad7864b6488e6"
-
 app = Flask(__name__)
-app.config["SLACK_TOKEN"] = "xoxp-12574501523-12578409008-17628102802-e267e28b16"
-# if you need to use slacker you should give a slack chat token
-#app.config["SLACK_CHAT_TOKEN"] = 'yD1MPDH6wyef9jU92QbQLBvm'
-#app.config["SLACK_CALLBACK"] = '/slack_outgoing'
-app.debug = True
-
-
  
 @app.route("/", methods=["GET", "POST"])
 def hello():
