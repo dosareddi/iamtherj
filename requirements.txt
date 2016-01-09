@@ -4,5 +4,3 @@ gunicorn>=19.2.1
 python-firebase>=1.2
 requests>=2.5.1
 slackclient>=0.16
-flask-slackbot>=0.2.1
-slacker>=0.8.6.2

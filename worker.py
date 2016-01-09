@@ -1,5 +1,4 @@
 from flask import Flask, request, redirect
-from flask_slackbot import SlackBot
 from firebase import firebase
 from slackclient import SlackClient
 from twilio.rest import TwilioRestClient
@@ -11,7 +10,9 @@ TWILIO_ACCOUNT_SID="AC3de92c17107049aece1a2378b84b3e38"
 TWILIO_AUTH_TOKEN="10f150926cea141e336ad7864b6488e6"
 
 # THINGS TO FIX
-# 1. 
+# P0: No duplicates.
+# P0: Get phone number from channel info.
+# P2. Persist messages to DB, or at least the last timestamp
 
 sc = SlackClient("xoxp-12574501523-12578409008-17628102802-e267e28b16")
 sc.rtm_connect()
