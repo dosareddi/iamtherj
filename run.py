@@ -23,9 +23,10 @@ def create_channel(channel_name):
     response = slack_client.api_call("channels.create", channel=channel_name)         
     response_dict = json.loads(response)
     if response_dict["ok"]:
-        firebase_client.put(FIREBASE_CHANNEL_VERIFY_PATH, channel_name, True, connection=None)
+        firebase_client.put(FIREBASE_CHANNEL_VERIFY_PATH, channel_name, "1", connection=None)
         print "channel created"
         return
+    print channel_name
     print response
     print "channel creation fail"
 
