@@ -25,17 +25,16 @@ firebase_client  = firebase.FirebaseApplication('https://burning-torch-4695.fire
 def get_channel_number(channel_name):
     # Check in firebase for this channel.
     fb_result = firebase_client.get(FIREBASE_CHANNEL_NUMBERS_PATH, channel_name)
-    if fb_result and fb_result.contains_key(channel_name):
-        return fb_result[channel_name]
+    if fb_result:
+        return fb_result
 
-    response = slack_client.api_call("channels.info", channel=channel_name)         
     # If doesn't exist, call channels API to get info for this channel 
-    # and update it.
-    print response
+    # and update it in firebase
+    response = slack_client.api_call("channels.info", channel=channel_name)         
     response_dict = json.loads(response)
     if response_dict["ok"]:
         number = response_dict["channel"]["name"]
-        firebase_client.put(FIREBASE_CHANNEL_NUMBERS_PATH, {channel_name : number})
+        firebase_client.put(FIREBASE_CHANNEL_NUMBERS_PATH, channel_name, number, connection=None)
         return number
     return None
 
