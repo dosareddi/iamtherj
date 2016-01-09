@@ -17,15 +17,26 @@ TWILIO_AUTH_TOKEN="10f150926cea141e336ad7864b6488e6"
 
 slack_client = SlackClient("xoxp-12574501523-12578409008-17628102802-e267e28b16")
 
+FIREBASE_CHANNEL_NUMBERS_PATH = "/channel_numbers"
+firebase_client  = firebase.FirebaseApplication('https://burning-torch-4695.firebaseio.com', None)
+
+
+
 def get_channel_number(channel_name):
     # Check in firebase for this channel.
+    fb_result = firebase_client.get(FIREBASE_CHANNEL_NUMBERS_PATH, channel_name)
+    if fb_result and fb_result.contains_key(channel_name):
+        return fb_result[channel_name]
+
     response = slack_client.api_call("channels.info", channel=channel_name)         
     # If doesn't exist, call channels API to get info for this channel 
     # and update it.
     print response
     response_dict = json.loads(response)
     if response_dict["ok"]:
-        return response_dict["channel"]["name"]
+        number = response_dict["channel"]["name"]
+        firebase_client.put(FIREBASE_CHANNEL_NUMBERS_PATH, {channel_name : number})
+        return number
     return None
 
 
