@@ -20,7 +20,6 @@ def hello():
         sr = sc.api_call("chat.postMessage", channel=slack_channel, text=message)         
     else:
         return resp.message("fail")
-    sr = sc.api_call("channels.create", name="12134468877")
     return resp.message(str(sr))
 
 if __name__ == "__main__":

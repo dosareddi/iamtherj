@@ -49,5 +49,4 @@ while True:
             if number:
                 message = client.messages.create(to="+" + number, from_="+12139153611",
                                                  body=m["text"])
-            
     time.sleep(0.5)
