@@ -18,36 +18,6 @@ app.config["SLACK_CALLBACK"] = '/slack_outgoing'
 app.debug = True
 slackbot = SlackBot(app)
 
-'''
-The parameter of the callback function is a dict returns from the slack's outgoing api.
-Here is the detail:
-kwargs
-{
-    'token': token,
-    'team_id': team_id,
-    'team_domain': team_domain,
-    'channel_id': channel_id,
-    'channel_name': channel_name,
-    'timestamp': timestamp,
-    'user_id': user_id,
-    'user_name': user_name,
-    'text': text,
-    'trigger_word': trigger_word
-}'''
-def process_slack(kwargs):
-    '''
-    This function shows response the slack post directly without an extra post.
-    In this case, you need to return a dict.'''
-    client = TwilioRestClient(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
-    message = client.messages.create(to="+" + kwargs["channel_name"], from_="+12139153611",
-                                     body=kwargs["text"][len("outgoing"):])
-    return {"text": "!sent"}
-
-def filter_slack(text):
-    '''
-    This function is a filter, which makes our bot ignore the text sent from itself.'''
-    return text.startswith('!')
-
  
 @app.route("/", methods=["GET", "POST"])
 def hello():
@@ -65,19 +35,6 @@ def hello():
     sr = sc.api_call("channels.create", name="12134468877")
     return resp.message(str(sr))
 
-
-@app.route("/slack_incoming", methods=["GET", "POST"])
-def slack_incoming():
-    message = request.values.get("text", None)
-    number = request.values.get("channel_name", None)
-    client = TwilioRestClient(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
-    message = client.messages.create(to="+" + number, from_="+12139153611",
-                                     body=message)
-    return ""
-
-
 if __name__ == "__main__":
     app.run(debug=True)
 
-#slackbot.set_handler(process_slack)
-#slackbot.filter_outgoing(filter_slack)
