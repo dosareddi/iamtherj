@@ -26,6 +26,7 @@ def create_channel(channel_name):
         firebase_client.put(FIREBASE_CHANNEL_VERIFY_PATH, channel_name, True, connection=None)
         print "channel created"
         return
+    print response
     print "channel creation fail"
 
 
