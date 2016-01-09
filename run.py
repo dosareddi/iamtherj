@@ -1,8 +1,6 @@
 from flask import Flask, request, redirect
-from flask_slackbot import SlackBot
 from firebase import firebase
 from slackclient import SlackClient
-from twilio.rest import TwilioRestClient
 
 import twilio.twiml
 import time
