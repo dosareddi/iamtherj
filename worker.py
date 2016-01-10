@@ -21,7 +21,6 @@ FIREBASE_CHANNEL_NUMBERS_PATH = "/channel_numbers"
 firebase_client  = firebase.FirebaseApplication('https://burning-torch-4695.firebaseio.com', None)
 
 
-
 def get_channel_number(channel_name):
     # Check in firebase for this channel.
     fb_result = firebase_client.get(FIREBASE_CHANNEL_NUMBERS_PATH, channel_name)

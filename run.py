@@ -21,6 +21,7 @@ def create_channel(channel_name):
     # If doesn't exist, call channels API to create this channel and update it
     # in firebase
     response = slack_client.api_call("channels.create", name=channel_name)         
+    print response
     response_dict = json.loads(response)
     if response_dict["ok"]:
         firebase_client.put(FIREBASE_CHANNEL_VERIFY_PATH, channel_name, True, connection=None)
