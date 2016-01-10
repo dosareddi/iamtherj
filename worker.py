@@ -41,7 +41,8 @@ def get_channel_number(channel_name):
 slack_client.rtm_connect()
 while True:
     messages = slack_client.rtm_read()
-    for m in messages:   
+    for m in messages:
+        print m
         if m["type"] == "message" and m.get("subtype", "") != "bot_message":
             client = TwilioRestClient(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
             number = get_channel_number(m["channel"])
