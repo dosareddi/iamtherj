@@ -18,6 +18,7 @@ TWILIO_AUTH_TOKEN="10f150926cea141e336ad7864b6488e6"
 slack_client = SlackClient("xoxp-12574501523-12578409008-17628102802-e267e28b16")
 
 FIREBASE_CHANNEL_NUMBERS_PATH = "/channel_numbers"
+FIREBASE_CHANNEL_TIMESTAMP_PATH = "/channel_timestamp"
 firebase_client  = firebase.FirebaseApplication('https://burning-torch-4695.firebaseio.com', None)
 
 
@@ -42,11 +43,19 @@ slack_client.rtm_connect()
 while True:
     messages = slack_client.rtm_read()
     for m in messages:
-        print m
         if m["type"] == "message" and m.get("subtype", "") != "bot_message":
             client = TwilioRestClient(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
             number = get_channel_number(m["channel"])
-            if number:
+            if not number:
+                continue
+            timestamp = float(m["ts"])
+            chkpoint = 0
+            channel_timestamp = firebase_client.get(FIREBASE_CHANNEL_TIMESTAMP_PATH, number)
+            if channel_timestamp:
+                chkpoint = channel_timestamp)
+            if timestamp > chkpoint :
                 message = client.messages.create(to="+" + number, from_="+12139153611",
                                                  body=m["text"])
+                firebase_client.put(FIREBASE_CHANNEL_TIMESTAMP_PATH, number, timestamp, connection=None)
+                
     time.sleep(0.5)
