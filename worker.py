@@ -27,7 +27,6 @@ def get_channel_number(channel_name):
     fb_result = firebase_client.get(FIREBASE_CHANNEL_NUMBERS_PATH, channel_name)
     if fb_result:
         return fb_result
-
     # If doesn't exist, call channels API to get info for this channel 
     # and update it in firebase
     response = slack_client.api_call("channels.info", channel=channel_name)         
