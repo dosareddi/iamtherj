@@ -22,6 +22,8 @@ def update_channel(channel_name):
     create_channel(channel_name)
     channel_state = firebase_client.get(fb.CHANNELS_PATH + "/" + channel_name + fb.CHANNELS_INFO_SUBDIR,
                                         fb.CHANNELS_INFO_KEY_STATE)
+    print channel_state
+    print fb.CHANNELS_INFO_VAL_STATE_WORKER_UNASSIGNED
     if channel_state != fb.CHANNELS_INFO_VAL_STATE_WORKER_UNASSIGNED:
         firebase_client.put(fb.CHANNELS_PATH + "/" + channel_name + fb.CHANNELS_INFO_SUBDIR, 
                             fb.CHANNELS_INFO_KEY_STATE, fb.CHANNELS_INFO_VAL_STATE_WAITING_FOR_WORKER, 
