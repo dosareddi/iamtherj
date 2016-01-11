@@ -52,7 +52,7 @@ while True:
             chkpoint = 0
             channel_timestamp = firebase_client.get(FIREBASE_CHANNEL_TIMESTAMP_PATH, number)
             if channel_timestamp:
-                chkpoint = channel_timestamp)
+                chkpoint = channel_timestamp
             if timestamp > chkpoint :
                 message = client.messages.create(to="+" + number, from_="+12139153611",
                                                  body=m["text"])
