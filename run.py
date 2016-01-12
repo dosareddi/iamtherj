@@ -55,6 +55,7 @@ def create_channel(channel_name):
 
 @app.route("/", methods=["GET", "POST"])
 def hello():
+    print "hello"
     number = request.values.get("From", None)
     # Get rid of the "+"
     slack_channel = str(number)[1:]
