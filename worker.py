@@ -71,8 +71,18 @@ def process_worker_messages(messages):
 # TODO(dasarathi): Move this to a separate worker.
 def broadcast_unassigned_channels():
     # Get all channels.
-    all_channels = firebase_client.get(fb.CHANNELS_PATH)
-    print all_channels
+    all_channels = firebase_client.get(fb.CHANNELS_PATH, None)
+    unassigned_channels = []
+    for c, val in all_channels.iteritems():
+        if val["info"]["state"] == fb.CHANNELS_INFO_VAL_STATE_WORKER_UNASSIGNED:
+            unassigned_channels.append(c)
+    print unassigned_channels
+    # TODO(dasarathi): Add the following logic here
+    # - Bringing a bot in to ask the basics
+    # - Checking whether worker is right match
+
+    # Get all open workers.
+
 
 slack_client.rtm_connect()
 while True:
