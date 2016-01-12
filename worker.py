@@ -44,10 +44,9 @@ def is_valid_message(message_dict):
         message_dict.get("subtype", "") != "bot_message"):
         return True
     return False
-        
-slack_client.rtm_connect()
-while True:
-    messages = slack_client.rtm_read()
+    
+# Go through messages from workers and forward them to customers.    
+def process_worker_messages(messages):
     for m in messages:
         if is_valid_message(m):
             client = TwilioRestClient(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
@@ -68,5 +67,16 @@ while True:
                     fb.CHANNELS_PATH + "/" + number + fb.CHANNELS_MESSAGEINFO_SUBDIR, 
                     fb.CHANNELS_MESSAGEINFO_KEY_LAST_SENT_TS, 
                     timestamp, connection=None)
+
+# TODO(dasarathi): Move this to a separate worker.
+def broadcast_unassigned_channels():
+    # Get all channels.
+    all_channels = firebase_client.get(fb.CHANNELS_PATH)
+    print all_channels
+
+slack_client.rtm_connect()
+while True:
+    process_worker_messages(slack_client.rtm_read())
+    broadcast_unassigned_channels()
                 
     time.sleep(0.5)
