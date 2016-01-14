@@ -36,9 +36,9 @@ def create_channel(channel_name):
     # Check in firebase for this channel.
     fb_result = firebase_client.get(fb.CHANNELS_PATH + "/" + channel_name + fb.CHANNELS_INFO_SUBDIR,
                                     fb.CHANNELS_INFO_KEY_STATE)
-    print "looking for channel"
-    print channel_name
-    print fb_result
+#    print "looking for channel"
+#    print channel_name
+#    print fb_result
     if fb_result:
         return
     # If doesn't exist, call channels API to create this channel and update it
