@@ -70,7 +70,8 @@ def hello():
 
 @app.route("/register", methods=["GET", "POST"])
 def register_worker():
-    print "Worker register invoked"
+    print "Worker register invoked\n"
+    print request
     # Check token
     # Add worker to Firebase.
     return ""
