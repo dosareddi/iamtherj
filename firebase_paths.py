@@ -26,3 +26,4 @@ SLACK_ID_CHANNEL_NAME_PATH = "/slack_id/channel"
 WORKERS_PATH = "/workers"
 # Slack id is stored here.
 WORKERS_KEY_ID = "id"
+WORKERS_KEY_NAME = "name"

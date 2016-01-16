@@ -68,6 +68,13 @@ def hello():
     # TODO(dosareddi): Check if this is necessary.
     return resp.message("")
 
+@app.route("/register", methods=["GET", "POST"])
+def register_worker():
+    print "Worker register invoked"
+    # Check token
+    # Add worker to Firebase.
+    return ""
+
 if __name__ == "__main__":
     app.run(debug=True)
 
