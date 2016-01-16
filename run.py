@@ -14,6 +14,8 @@ firebase_client  = firebase.FirebaseApplication('https://burning-torch-4695.fire
  
 slack_client = SlackClient("xoxp-12574501523-12578409008-17628102802-e267e28b16")
 
+SLACK_REGISTER_TOKEN = "r113P15z32hFS9ym7GFwBfR1"
+
 # update_channel does the following:
 # - creates the channel if necessary.
 # - sets the channel state 
@@ -71,10 +73,18 @@ def hello():
 @app.route("/register", methods=["GET", "POST"])
 def register_worker():
     print "Worker register invoked\n"
-    print request
     # Check token
-    # Add worker to Firebase.
-    return ""
+    token = request.values.get("token", None)
+    if token != SLACK_REGISTER_TOKEN:
+        print "Invalid token\n"
+        return None
+    # Add worker to DB.
+    user_id = request.values.get("user_id", None)
+    user_name = request.values.get("user_name", None)
+    firebase_client.put(fb.WORKERS_PATH + "/" + user_id + "/", 
+                        fb.WORKERS_KEY_NAME, user_name, 
+                        connection=None)
+    return "Worker registered"
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,4 +1,3 @@
-
 # A channel is of the form /channels/12134572323
 # where the path is the name of the channel.
 CHANNELS_PATH = "/channels"
@@ -22,8 +21,6 @@ CHANNELS_MESSAGEINFO_KEY_LAST_SENT_TS = "last_sent_ts"
 # This is used for mapping a slack channel id to channel name.
 SLACK_ID_CHANNEL_NAME_PATH = "/slack_id/channel"
 
-# A worker path of the form /workers/<slack_name>
+# A worker path of the form /workers/<slack_id>
 WORKERS_PATH = "/workers"
-# Slack id is stored here.
-WORKERS_KEY_ID = "id"
 WORKERS_KEY_NAME = "name"
