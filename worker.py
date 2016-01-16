@@ -24,6 +24,9 @@ firebase_client  = firebase.FirebaseApplication('https://burning-torch-4695.fire
 
 
 def get_channel_name(slack_channel_id):
+    # Hack to prevent messages from other channels.
+    if not slack_channel_id.startswith("1"):
+        return None
     # Check in firebase for this channel.
     fb_result = firebase_client.get(fb.SLACK_ID_CHANNEL_NAME_PATH, slack_channel_id)
     if fb_result:
