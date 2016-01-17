@@ -91,8 +91,9 @@ def broadcast_unassigned_channels():
         # open channel to worker.
         sr = slack_client.api_call("im.open", user=w)
         response_dict = json.loads(sr)
-        sr = slack_client.api_call("chat.postMessage", channel=response_dict["channel"]["id"], 
-                                   text="channels open ")
+#        sr = slack_client.api_call("chat.postMessage", channel=response_dict["channel"]["id"], 
+#                                   text="channels open")
+        
 
 slack_client.rtm_connect()
 while True:
