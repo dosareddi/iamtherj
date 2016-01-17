@@ -80,9 +80,12 @@ def broadcast_unassigned_channels():
         print val
         if val["info"]["state"] == fb.CHANNELS_INFO_VAL_STATE_WORKER_UNASSIGNED:
             # Channel is unassigned.
-
+            worker_info = val.get("worker_info", None)
+            last_worker_request_ts = 0
+            if worker_info:
+                last_worker_request_ts = worker_info.get("last_worker_request_ts", 0)
             # Get last request for worker timestamp.
-            ts = val["worker_info"]["last_worker_request_ts"]
+            
             unassigned_channels.append(c)
     all_workers = firebase_client.get(fb.CHANNELS_PATH, None)
     # print unassigned_channels
