@@ -12,6 +12,8 @@ import firebase_paths as fb
 TWILIO_ACCOUNT_SID="AC3de92c17107049aece1a2378b84b3e38"
 TWILIO_AUTH_TOKEN="10f150926cea141e336ad7864b6488e6"
 
+SLACK_ANNOUNCEMENTS_CHANNEL_ID = "C0JLAFCEP"
+
 # THINGS TO FIX
 # P0: No duplicates.
 # P0: Get phone number from channel info.
@@ -33,7 +35,6 @@ def get_channel_name(slack_channel_id):
         response_dict = json.loads(response)
         if response_dict["ok"]:
             channel_name = response_dict["channel"]["name"]
-            print "bbb is ", slack_channel_id
             firebase_client.put(fb.SLACK_ID_CHANNEL_NAME_PATH, slack_channel_id, channel_name, connection=None)            
     # Hack to prevent sending messages from other channels.
     if not channel_name.startswith("1"):
@@ -76,6 +77,7 @@ def broadcast_unassigned_channels():
     # Get all channels.
     all_channels = firebase_client.get(fb.CHANNELS_PATH, None)
     unassigned_channels = []
+    cur_timestamp = time.mktime(time.gmtime())
     for c, val in all_channels.iteritems():
         if val["info"]["state"] == fb.CHANNELS_INFO_VAL_STATE_WORKER_UNASSIGNED:
             # Channel is unassigned.
@@ -84,9 +86,15 @@ def broadcast_unassigned_channels():
             if worker_info:
                 last_worker_request_ts = worker_info.get("last_worker_request_ts", 0)
             # Get last request for worker timestamp.
-            
-            unassigned_channels.append(c)
-    all_workers = firebase_client.get(fb.CHANNELS_PATH, None)
+            if cur_timestamp - last_worker_request_ts > 24 * 3600:
+                sr = slack_client.api_call("chat.postMessage", channel=SLACK_ANNOUNCEMENTS_CHANNEL_ID, 
+                                           text= "#" + c + " is waiting to be helped.")
+                
+                firebase_client.put(
+                    fb.CHANNELS_PATH + "/" + c + fb.CHANNELS_WORKERINFO_SUBDIR, 
+                    fb.CHANNELS_WORKERINFO_KEY_LAST_WORKER_REQUEST_TS,
+                    cur_timestamp, connection=None)
+
     # print unassigned_channels
     # TODO(dasarathi): Add the following logic here
     # - Bringing a bot in to ask the basics
@@ -108,5 +116,5 @@ def broadcast_unassigned_channels():
 slack_client.rtm_connect()
 while True:
     process_worker_messages(slack_client.rtm_read())
-#    broadcast_unassigned_channels()                
+    broadcast_unassigned_channels()                
     time.sleep(2.0)

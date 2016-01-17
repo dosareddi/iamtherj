@@ -26,8 +26,8 @@ WORKERS_PATH = "/workers"
 WORKERS_KEY_NAME = "name"
 
 # Worker channel assignment message tracking
-# A path is of the form /worker_channel_ass/<worker_slack_id>/<channel>
-WORKER_CHANNEL_ASSIGNMENT_PATH = "/worker_channel_ass"
+# A path is of the form /channel_ass/<worker_slack_id>/<channel>
+CHANNEL_ASSIGNMENT_PATH = "/worker_channel_ass"
 # This key's value is the last message sent timestamp.
 WORKER_CHANNEL_ASSIGNMENT_KEY_NAME = "ts"
 
