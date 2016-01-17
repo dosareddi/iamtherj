@@ -88,11 +88,14 @@ def broadcast_unassigned_channels():
     # Get all open workers.
     all_workers = firebase_client.get(fb.WORKERS_PATH, None)
     for w, info in all_workers.iteritems():
-        print w
+        # open channel to worker.
+        sr = slack_client.api_call("im.open", user=w)
+        print sr
+#        sr = slack_client.api_call("chat.postMessage", channel="#" + slack_channel, text=message)
 
 slack_client.rtm_connect()
 while True:
     process_worker_messages(slack_client.rtm_read())
     broadcast_unassigned_channels()
                 
-    time.sleep(0.5)
+    time.sleep(2.0)
