@@ -77,20 +77,28 @@ def broadcast_unassigned_channels():
     all_channels = firebase_client.get(fb.CHANNELS_PATH, None)
     unassigned_channels = []
     for c, val in all_channels.iteritems():
+        print val
         if val["info"]["state"] == fb.CHANNELS_INFO_VAL_STATE_WORKER_UNASSIGNED:
+            # Channel is unassigned.
+
+            # Get last request for worker timestamp.
+            ts = val["worker_info"]["last_worker_request_ts"]
             unassigned_channels.append(c)
     all_workers = firebase_client.get(fb.CHANNELS_PATH, None)
     # print unassigned_channels
     # TODO(dasarathi): Add the following logic here
     # - Bringing a bot in to ask the basics
     # - Checking whether worker is right match
-
+    # - Sending 
     # Get all open workers.
-    all_workers = firebase_client.get(fb.WORKERS_PATH, None)
-    for w, info in all_workers.iteritems():
+#    all_workers = firebase_client.get(fb.WORKERS_PATH, None)
+#    for w, info in all_workers.iteritems():
         # open channel to worker.
-        sr = slack_client.api_call("im.open", user=w)
-        response_dict = json.loads(sr)
+#        sr = slack_client.api_call("im.open", user=w)
+#        response_dict = json.loads(sr)
+        
+        # Get last message assignment sent timestamp.
+        
 #        sr = slack_client.api_call("chat.postMessage", channel=response_dict["channel"]["id"], 
 #                                   text="channels open")
         
