@@ -79,13 +79,16 @@ def broadcast_unassigned_channels():
     for c, val in all_channels.iteritems():
         if val["info"]["state"] == fb.CHANNELS_INFO_VAL_STATE_WORKER_UNASSIGNED:
             unassigned_channels.append(c)
+    all_workers = firebase_client.get(fb.CHANNELS_PATH, None)
     # print unassigned_channels
     # TODO(dasarathi): Add the following logic here
     # - Bringing a bot in to ask the basics
     # - Checking whether worker is right match
 
     # Get all open workers.
-    
+    all_workers = firebase_client.get(fb.WORKERS_PATH, None)
+    for w, info in all_workers.iteritems():
+        print w
 
 slack_client.rtm_connect()
 while True:
