@@ -24,22 +24,22 @@ firebase_client  = firebase.FirebaseApplication('https://burning-torch-4695.fire
 
 
 def get_channel_name(slack_channel_id):
-    # Hack to prevent messages from other channels.
-    if not slack_channel_id.startswith("1"):
-        return None
     # Check in firebase for this channel.
-    fb_result = firebase_client.get(fb.SLACK_ID_CHANNEL_NAME_PATH, slack_channel_id)
-    if fb_result:
-        return fb_result
-    # If doesn't exist, call channels API to get info for this channel 
-    # and update it in firebase
-    response = slack_client.api_call("channels.info", channel=slack_channel_id)         
-    response_dict = json.loads(response)
-    if response_dict["ok"]:
-        channel_name = response_dict["channel"]["name"]
-        firebase_client.put(fb.SLACK_ID_CHANNEL_NAME_PATH, slack_channel_id, channel_name, connection=None)
-        return channel_name
-    return None
+    channel_name = firebase_client.get(fb.SLACK_ID_CHANNEL_NAME_PATH, slack_channel_id)
+    if not channel_name:
+        # If doesn't exist, call channels API to get info for this channel 
+        # and update it in firebase
+        response = slack_client.api_call("channels.info", channel=slack_channel_id)         
+        response_dict = json.loads(response)
+        if response_dict["ok"]:
+            channel_name = response_dict["channel"]["name"]
+            print "bbb is ", slack_channel_id
+            firebase_client.put(fb.SLACK_ID_CHANNEL_NAME_PATH, slack_channel_id, channel_name, connection=None)            
+    # Hack to prevent sending messages from other channels.
+    if not channel_name.startswith("1"):
+        return None
+
+    return channel_name
 
 # TODO(dasarathi): Filter messages starting with "<"
 def is_valid_message(message_dict):
