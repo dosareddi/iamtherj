@@ -77,7 +77,6 @@ def broadcast_unassigned_channels():
     all_channels = firebase_client.get(fb.CHANNELS_PATH, None)
     unassigned_channels = []
     for c, val in all_channels.iteritems():
-        print val
         if val["info"]["state"] == fb.CHANNELS_INFO_VAL_STATE_WORKER_UNASSIGNED:
             # Channel is unassigned.
             worker_info = val.get("worker_info", None)
@@ -109,6 +108,5 @@ def broadcast_unassigned_channels():
 slack_client.rtm_connect()
 while True:
     process_worker_messages(slack_client.rtm_read())
-    broadcast_unassigned_channels()
-                
+#    broadcast_unassigned_channels()                
     time.sleep(2.0)
