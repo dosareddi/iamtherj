@@ -31,6 +31,7 @@ def update_channel(channel):
 # else it creates the slack channel and then updates firebase.
 # it also sets the state to WORKER_UNASSIGNED
 def create_channel(channel):
+    print "Creating channel"
     # Check in firebase for this channel.
     fb_result = firebase_client.get(fb.CHANNEL_WORKER_PATH + "/" + channel)
     print fb_result
