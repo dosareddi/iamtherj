@@ -27,16 +27,18 @@ firebase_client  = firebase.FirebaseApplication('https://burning-torch-4695.fire
 
 def get_channel_name(slack_channel_id):
     # Check in firebase for this channel.
-    channel_name = firebase_client.get(fb.SLACK_ID_CHANNEL_NAME_PATH,
+    channel_name = firebase_client.get(fb.SLACK_ID_CHANNEL_PATH,
                                        slack_channel_id)
     if not channel_name:
         # If doesn't exist, call channels API to get info for this channel 
         # and update it in firebase
-        response = slack_client.api_call("channels.info", channel=slack_channel_id)         
+        response = slack_client.api_call("channels.info",
+                                         channel=slack_channel_id)         
         response_dict = json.loads(response)
         if response_dict["ok"]:
             channel_name = response_dict["channel"]["name"]
-            firebase_client.put(fb.SLACK_ID_CHANNEL_NAME_PATH, slack_channel_id, channel_name, connection=None)            
+            firebase_client.put(fb.SLACK_ID_CHANNEL_PATH, slack_channel_id,
+                                channel_name, connection=None)            
     # Hack to prevent sending messages from other channels.
     if not channel_name.startswith("1"):
         return None
