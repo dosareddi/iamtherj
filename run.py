@@ -91,12 +91,15 @@ def assign():
         print "Invalid token\n"
         return None
 
+    print "valid token"
+    
     # Check if worker is in DB.
     worker_id = request.values.get("user_id", None)
-    worker = firebase_client.get(fb.WORKERS_PATH, user_id)
+    worker = firebase_client.get(fb.WORKERS_PATH, worker_id)
     if not worker:
         return "You are not registered, please register first"
-
+    print "worker not registered"
+    
     # Look at what channels are open.
     all_channels = firebase_client.get(fb.CHANNEL_WORKER_PATH, None)
     for channel, worker_id in all_channels.iteritems():
