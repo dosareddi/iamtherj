@@ -9,14 +9,10 @@ CHANNELS_INFO_VAL_STATE_WORKER_UNASSIGNED = 0
 CHANNELS_INFO_VAL_STATE_WAITING_FOR_WORKER = 1
 CHANNELS_INFO_VAL_STATE_WAITING_FOR_CUSTOMER = 2
 
-# Channel Worker Info is of the form /channels/12134572323/worker_info
-CHANNELS_WORKERINFO_SUBDIR = "/worker_info"
-CHANNELS_WORKERINFO_KEY_ID = "id"
-CHANNELS_WORKERINFO_KEY_LAST_WORKER_REQUEST_TS = "last_worker_request_ts"
-
-# Channel Message Info is of the form /channels/12134572323/message_info
-CHANNELS_MESSAGEINFO_SUBDIR = "/message_info"
-CHANNELS_MESSAGEINFO_KEY_LAST_SENT_TS = "last_sent_ts"
+# Channel Worker ID is a mapping of the form /channel_worker
+# A key is a channel id and value is worker id if any assigned, if none then
+# value is 0.
+CHANNEL_WORKER_PATH = "/channel_worker"
 
 # This is used for mapping a slack channel id to channel name.
 SLACK_ID_CHANNEL_NAME_PATH = "/slack_id/channel"
@@ -25,10 +21,5 @@ SLACK_ID_CHANNEL_NAME_PATH = "/slack_id/channel"
 WORKERS_PATH = "/workers"
 WORKERS_KEY_NAME = "name"
 
-# Worker channel assignment message tracking
-# A path is of the form /channel_ass/<worker_slack_id>/<channel>
-CHANNEL_ASSIGNMENT_PATH = "/worker_channel_ass"
-# This key's value is the last message sent timestamp.
-WORKER_CHANNEL_ASSIGNMENT_KEY_NAME = "ts"
 
 
