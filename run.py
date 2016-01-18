@@ -15,6 +15,7 @@ firebase_client  = firebase.FirebaseApplication('https://burning-torch-4695.fire
 slack_client = SlackClient("xoxp-12574501523-12578409008-17628102802-e267e28b16")
 
 SLACK_REGISTER_TOKEN = "r113P15z32hFS9ym7GFwBfR1"
+SLACK_ASSIGN_CHANNEL_TOKEN = "amtyr1lSab5DTTjqSqYqQ0yE"
 
 #TODO:
 # - Don't expose phone number for channel
@@ -80,12 +81,12 @@ def register_worker():
                         connection=None)
     return "Worker registered"
 
-@app.route("/assign_channel", methods=["GET", "POST"])
-def assign_channel():
+@app.route("/assign", methods=["GET", "POST"])
+def assign():
     print "Assign channel invoked"
     # Check token
     token = request.values.get("token", None)
-    if token != SLACK_HELP_CHANNEL_TOKEN:
+    if token != SLACK_ASSIGN_CHANNEL_TOKEN:
         print "Invalid token\n"
         return None
 
