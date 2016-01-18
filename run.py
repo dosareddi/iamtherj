@@ -125,7 +125,6 @@ def assign():
 
         # TODO(dasarathi):
         # - Set topic to count of open channels. 
-        print "found channel " + channel
         return "Channel Allocated"
     
     return "No Channel Found"

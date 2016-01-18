@@ -60,7 +60,7 @@ def process_worker_messages(messages):
             timestamp = float(m["ts"])
             chkpoint = 0
             channel_timestamp = firebase_client.get(
-                fb.CHANNELS_LAST_FWD_TIME + "/" + channel)
+                fb.CHANNELS_LAST_FWD_TIME, channel)
             if channel_timestamp:
                 chkpoint = channel_timestamp
             if timestamp > chkpoint :
@@ -68,10 +68,10 @@ def process_worker_messages(messages):
                                                  from_="+12139153611",
                                                  body=m["text"])
                 firebase_client.put(fb.CHANNELS_LAST_FWD_TIME,
-                                    number, timestamp, connection=None)
+                                    channel, timestamp, connection=None)
 
 slack_client.rtm_connect()
 while True:
-#    process_worker_messages(slack_client.rtm_read())
+    process_worker_messages(slack_client.rtm_read())
 #    broadcast_unassigned_channels()                
     time.sleep(2000.0)
