@@ -55,7 +55,7 @@ def process_worker_messages(messages):
         if is_valid_message(m):
             client = TwilioRestClient(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
             channel = get_channel_name(m["channel"])
-            if not number:
+            if not channel:
                 continue
             timestamp = float(m["ts"])
             chkpoint = 0
@@ -64,7 +64,7 @@ def process_worker_messages(messages):
             if channel_timestamp:
                 chkpoint = channel_timestamp
             if timestamp > chkpoint :
-                message = client.messages.create(to="+" + number,
+                message = client.messages.create(to="+" + channel,
                                                  from_="+12139153611",
                                                  body=m["text"])
                 firebase_client.put(fb.CHANNELS_LAST_FWD_TIME,
