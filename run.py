@@ -33,6 +33,7 @@ def update_channel(channel):
 def create_channel(channel):
     # Check in firebase for this channel.
     fb_result = firebase_client.get(fb.CHANNEL_WORKER_PATH + "/" + channel)
+    print fb_result
     if fb_result:
         return
     # If doesn't exist, call channels API to create this channel and update it
