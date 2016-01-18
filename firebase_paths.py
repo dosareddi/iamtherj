@@ -2,12 +2,8 @@
 # where the path is the name of the channel.
 CHANNELS_PATH = "/channels"
 
-# Channel Info is of the form /channels/12134572323/info
-CHANNELS_INFO_SUBDIR = "/info"
-CHANNELS_INFO_KEY_STATE = "state"
-CHANNELS_INFO_VAL_STATE_WORKER_UNASSIGNED = 0
-CHANNELS_INFO_VAL_STATE_WAITING_FOR_WORKER = 1
-CHANNELS_INFO_VAL_STATE_WAITING_FOR_CUSTOMER = 2
+# Used to keep track of the timestamp of the last fwded message from a channel
+CHANNELS_LAST_FWD_TIME = "/channels_last_fwd_time"
 
 # Channel Worker ID is a mapping of the form /channel_worker
 # A key is a channel id and value is worker id if any assigned, if none then

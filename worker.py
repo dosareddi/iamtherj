@@ -54,64 +54,21 @@ def process_worker_messages(messages):
     for m in messages:
         if is_valid_message(m):
             client = TwilioRestClient(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
-            number = get_channel_name(m["channel"])
+            channel = get_channel_name(m["channel"])
             if not number:
                 continue
             timestamp = float(m["ts"])
             chkpoint = 0
             channel_timestamp = firebase_client.get(
-                fb.CHANNELS_PATH + "/" + number + fb.CHANNELS_MESSAGEINFO_SUBDIR, 
-                fb.CHANNELS_MESSAGEINFO_KEY_LAST_SENT_TS)
+                fb.CHANNELS_LAST_FWD_TIME + "/" + channel)
             if channel_timestamp:
                 chkpoint = channel_timestamp
             if timestamp > chkpoint :
-                message = client.messages.create(to="+" + number, from_="+12139153611",
+                message = client.messages.create(to="+" + number,
+                                                 from_="+12139153611",
                                                  body=m["text"])
-                firebase_client.put(
-                    fb.CHANNELS_PATH + "/" + number + fb.CHANNELS_MESSAGEINFO_SUBDIR, 
-                    fb.CHANNELS_MESSAGEINFO_KEY_LAST_SENT_TS, 
-                    timestamp, connection=None)
-
-# TODO(dasarathi): Move this to a separate worker.
-def broadcast_unassigned_channels():
-    # Get all channels.
-    all_channels = firebase_client.get(fb.CHANNELS_PATH, None)
-    unassigned_channels = []
-    cur_timestamp = time.mktime(time.gmtime())
-    for c, val in all_channels.iteritems():
-        if val["info"]["state"] == fb.CHANNELS_INFO_VAL_STATE_WORKER_UNASSIGNED:
-            # Channel is unassigned.
-            worker_info = val.get("worker_info", None)
-            last_worker_request_ts = 0
-            if worker_info:
-                last_worker_request_ts = worker_info.get("last_worker_request_ts", 0)
-            # Get last request for worker timestamp.
-            if cur_timestamp - last_worker_request_ts > 24 * 3600:
-                sr = slack_client.api_call("chat.postMessage", channel=SLACK_ANNOUNCEMENTS_CHANNEL_ID, 
-                                           text= "#" + c + " is waiting to be helped.")
-                
-                firebase_client.put(
-                    fb.CHANNELS_PATH + "/" + c + fb.CHANNELS_WORKERINFO_SUBDIR, 
-                    fb.CHANNELS_WORKERINFO_KEY_LAST_WORKER_REQUEST_TS,
-                    cur_timestamp, connection=None)
-
-    # print unassigned_channels
-    # TODO(dasarathi): Add the following logic here
-    # - Bringing a bot in to ask the basics
-    # - Checking whether worker is right match
-    # - Sending 
-    # Get all open workers.
-#    all_workers = firebase_client.get(fb.WORKERS_PATH, None)
-#    for w, info in all_workers.iteritems():
-        # open channel to worker.
-#        sr = slack_client.api_call("im.open", user=w)
-#        response_dict = json.loads(sr)
-        
-        # Get last message assignment sent timestamp.
-        
-#        sr = slack_client.api_call("chat.postMessage", channel=response_dict["channel"]["id"], 
-#                                   text="channels open")
-        
+                firebase_client.put(fb.CHANNELS_LAST_FWD_TIME,
+                                    number, timestamp, connection=None)
 
 slack_client.rtm_connect()
 while True:
