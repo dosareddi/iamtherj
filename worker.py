@@ -27,7 +27,8 @@ firebase_client  = firebase.FirebaseApplication('https://burning-torch-4695.fire
 
 def get_channel_name(slack_channel_id):
     # Check in firebase for this channel.
-    channel_name = firebase_client.get(fb.SLACK_ID_CHANNEL_NAME_PATH, slack_channel_id)
+    channel_name = firebase_client.get(fb.SLACK_ID_CHANNEL_NAME_PATH,
+                                       slack_channel_id)
     if not channel_name:
         # If doesn't exist, call channels API to get info for this channel 
         # and update it in firebase
@@ -74,4 +75,4 @@ slack_client.rtm_connect()
 while True:
     process_worker_messages(slack_client.rtm_read())
 #    broadcast_unassigned_channels()                
-    time.sleep(2000.0)
+    time.sleep(2.0)
