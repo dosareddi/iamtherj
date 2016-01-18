@@ -45,7 +45,8 @@ def create_channel(channel):
         firebase_client.put(fb.CHANNEL_WORKER_PATH,
                             channel, "0", connection=None)
         firebase_client.put(fb.CHANNEL_SLACK_ID_PATH,
-                            channel, response_dict["id"], connection=None)
+                            channel, response_dict["channel"]["id"],
+                            connection=None)
         return
     print "channel creation failed"
 
