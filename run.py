@@ -115,9 +115,12 @@ def assign():
         firebase_client.put(fb.CHANNEL_WORKER_PATH, channel, worker_id,
                             connection=None)
 
+        channel_id = firebase_client.get(fb.CHANNEL_SLACK_ID_PATH,
+                                         channel)
+        
         # Invite worker to channel.
         sr = slack_client.api_call("channels.invite",
-                                   channel="#" + channel,
+                                   channel=channel_id,
                                    user=worker_id)
 
         # TODO(dasarathi):
