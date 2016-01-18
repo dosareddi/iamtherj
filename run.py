@@ -103,6 +103,7 @@ def assign():
     # Look at what channels are open.
     all_channels = firebase_client.get(fb.CHANNEL_WORKER_PATH, None)
     for channel, worker_id in all_channels.iteritems():
+        print "channel is " + channel
         if worker_id != "0":
             continue
 
