@@ -74,4 +74,4 @@ slack_client.rtm_connect()
 while True:
     process_worker_messages(slack_client.rtm_read())
 #    broadcast_unassigned_channels()                
-    time.sleep(2.0)
+    time.sleep(2000.0)

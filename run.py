@@ -38,7 +38,7 @@ def create_channel(channel):
     # If doesn't exist, call channels API to create this channel and update it
     # in firebase
     response = slack_client.api_call("channels.create", name=channel)
-    
+    print response
     response_dict = json.loads(response)
     if response_dict["ok"]:
         firebase_client.put(fb.CHANNEL_WORKER_PATH,
@@ -49,6 +49,7 @@ def create_channel(channel):
 
 @app.route("/", methods=["GET", "POST"])
 def hello():
+    print "invoking hello"
     number = request.values.get("From", None)
     # Get rid of the "+"
     slack_channel = str(number)[1:]
