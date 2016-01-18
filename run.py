@@ -125,7 +125,8 @@ def assign():
                                    user=worker_id)
 
         # TODO(dasarathi):
-        # - Set topic to count of open channels. 
+        # - Set topic to count of open channels.
+        # - Send response using delayed..
         return "Channel Allocated"
     
     return "No Channel Found"
@@ -140,6 +141,18 @@ def leave():
         print "Invalid token\n"
         return None
 
+    channel = request.values.get("channel_name", None)
+    channel_id = request.values.get("channel_id", None)
+    firebase_client.put(fb.CHANNEL_WORKER_PATH, channel, "0",
+                        connection=None)
+
+    worker_id = request.values.get("user_id", None)
+    
+    # Invite worker to channel.
+    sr = slack_client.api_call("channels.kick",
+                               channel=channel_id,
+                               user=worker_id)
+    return "Thanks for your help so far."    
 ###    print request
     
 
