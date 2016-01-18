@@ -13,6 +13,9 @@ CHANNEL_WORKER_PATH = "/channel_worker"
 # This is used for mapping a slack channel id to channel name.
 SLACK_ID_CHANNEL_NAME_PATH = "/slack_id/channel"
 
+# This is used for mapping a slack channel id to channel name.
+CHANNEL_NAME_SLACK_ID_PATH = "/channel_slack_id"
+
 # A worker path of the form /workers/<slack_id>
 WORKERS_PATH = "/workers"
 WORKERS_KEY_NAME = "name"
