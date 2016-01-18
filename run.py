@@ -129,6 +129,19 @@ def assign():
     
     return "No Channel Found"
 
+@app.route("/leave", methods=["GET", "POST"])
+def leave():
+    print "Leave channel invoked"
+    print request
+    # Check token
+#    token = request.values.get("token", None)
+#    if token != SLACK_LEAVE_CHANNEL_TOKEN:
+#        print "Invalid token\n"
+#        return None
+
+###    print request
+    
+
 
 if __name__ == "__main__":
     app.run(debug=True)
