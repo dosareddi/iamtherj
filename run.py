@@ -98,7 +98,7 @@ def assign():
     worker = firebase_client.get(fb.WORKERS_PATH, worker_id)
     if not worker:
         return "You are not registered, please register first"
-    print "worker not registered"
+    print "worker registered"
     
     # Look at what channels are open.
     all_channels = firebase_client.get(fb.CHANNEL_WORKER_PATH, None)
@@ -118,7 +118,7 @@ def assign():
 
         # TODO(dasarathi):
         # - Set topic to count of open channels. 
-        
+        print "found channel " + channel
         return "Channel Allocated"
     
     return "No Channel Found"
