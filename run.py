@@ -39,10 +39,11 @@ def create_channel(channel):
     # If doesn't exist, call channels API to create this channel and update it
     # in firebase
     response = slack_client.api_call("channels.create", name=channel)
+    print response
     response_dict = json.loads(response)
     if response_dict["ok"]:
-        firebase_client.put(fb.CHANNEL_WORKER_PATH,
-                            channel, "0", connection=None)
+#        firebase_client.put(fb.CHANNEL_WORKER_PATH,
+#                            channel, "0", connection=None)        
         return
     print "channel creation failed"
 
@@ -102,9 +103,9 @@ def assign():
     
     # Look at what channels are open.
     all_channels = firebase_client.get(fb.CHANNEL_WORKER_PATH, None)
-    for channel, worker_id in all_channels.iteritems():
+    for channel, cur_worker in all_channels.iteritems():
         print "channel is " + channel
-        if worker_id != "0":
+        if cur_worker != "0":
             continue
 
         # Put worker id in channel DB.
