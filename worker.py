@@ -55,6 +55,7 @@ def is_valid_message(message_dict):
 # Go through messages from workers and forward them to customers.    
 def process_worker_messages(messages):
     for m in messages:
+        print m
         if is_valid_message(m):
             client = TwilioRestClient(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
             channel = get_channel_name(m["channel"])
@@ -73,6 +74,7 @@ def process_worker_messages(messages):
                 firebase_client.put(fb.CHANNELS_LAST_FWD_TIME,
                                     channel, timestamp, connection=None)
 
+                
 slack_client.rtm_connect()
 while True:
     process_worker_messages(slack_client.rtm_read())
