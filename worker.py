@@ -48,7 +48,8 @@ def get_channel_name(slack_channel_id):
 # TODO(dasarathi): Filter messages starting with "<"
 def is_valid_message(message_dict):
     if (message_dict["type"] == "message" and 
-        message_dict.get("subtype", "") != "bot_message"):
+        message_dict.get("subtype", "") != "bot_message" and
+        not message_dict["text"].startswith("<"):
         return True
     return False
     
