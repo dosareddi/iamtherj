@@ -1,13 +1,12 @@
 GiftForce
 
-GitHub branching practice.
---------------------------
-For each new changelist
-git checkout -b <branch>
-git fetch
-git add ...
-git commit ..
-git push origin <branch>
+This repo provides a way for clients to talk to workers using SMS. Workers will communicate using Slack, worker management is done 
+using Slack (programmed) commands.
+
+Commmitting and reloading instances
+-----------------------------------
+git commit -am . && git push origin master && git push heroku master
+
 
 Github starting afresh
 ----------------------
