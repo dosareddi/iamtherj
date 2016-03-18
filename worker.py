@@ -9,20 +9,20 @@ import time
 
 import firebase_paths as fb
 
-TWILIO_ACCOUNT_SID="AC3de92c17107049aece1a2378b84b3e38"
-TWILIO_AUTH_TOKEN="10f150926cea141e336ad7864b6488e6"
+TWILIO_ACCOUNT_SID="XX"
+TWILIO_AUTH_TOKEN="XX"
 
-SLACK_ANNOUNCEMENTS_CHANNEL_ID = "C0JLAFCEP"
+SLACK_ANNOUNCEMENTS_CHANNEL_ID = "XX"
 
 # THINGS TO FIX
 # P0: No duplicates.
 # P0: Get phone number from channel info.
 # P2. Persist messages to DB, or at least the last timestamp
 
-slack_client = SlackClient("xoxp-12574501523-12578409008-17628102802-e267e28b16")
+slack_client = SlackClient("XX")
 
 
-firebase_client  = firebase.FirebaseApplication('https://burning-torch-4695.firebaseio.com', None)
+firebase_client  = firebase.FirebaseApplication('https://burning-torch-XXXX.firebaseio.com', None)
 
 
 def get_channel_name(slack_channel_id):
@@ -69,7 +69,7 @@ def process_worker_messages(messages):
                 chkpoint = channel_timestamp
             if timestamp > chkpoint :
                 message = client.messages.create(to="+" + channel,
-                                                 from_="+12139153611",
+                                                 from_="+XX",  // Twilio number.
                                                  body=m["text"])
                 firebase_client.put(fb.CHANNELS_LAST_FWD_TIME,
                                     channel, timestamp, connection=None)
