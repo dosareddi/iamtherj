@@ -1,6 +1,4 @@
 Flask>=0.8
-twilio>=3.3.6
 gunicorn>=19.2.1
 python-firebase>=1.2
 requests>=2.5.1
-slackclient>=0.16
